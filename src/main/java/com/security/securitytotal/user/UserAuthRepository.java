@@ -1,4 +1,11 @@
-package com.security.securitytotal.user.config;
+package com.security.securitytotal.user;
 
-public class UserAuthRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface UserAuthRepository extends JpaRepository<UserAuthEntity, Long> {
+
+    Optional<UserAuthEntity> findByUsername(String username);
 }
