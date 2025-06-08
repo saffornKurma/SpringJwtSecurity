@@ -22,12 +22,14 @@ public class JwtAuthProvider implements AuthenticationProvider {
         String token =((JwtAuthToken)authentication).getToken();
 
         String username=jwtUtil.validateAndExtractUsername(token);
+        System.out.println("username receiv ed during token extraction validation:"+username);
 
         if(username==null){
             throw new BadCredentialsException("Invalid username or password");
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
 
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }

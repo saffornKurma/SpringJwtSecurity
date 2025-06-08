@@ -28,8 +28,6 @@ public class JwtValidateFilter extends OncePerRequestFilter {
             JwtAuthToken tokenObj=new JwtAuthToken(token);
             Authentication result=authenticationManager.authenticate(tokenObj);
             SecurityContextHolder.getContext().setAuthentication(result);
-
-
         }
 
 filterChain.doFilter(request, response);
@@ -38,6 +36,7 @@ filterChain.doFilter(request, response);
         String token = request.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
+            System.out.println("token receiv ed during token extraction validation:"+token);
             return token;
         }
         return null;

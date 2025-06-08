@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth/")
 public class UserAuthController {
 
     private final UserAuthService userAuthService;
@@ -29,7 +29,7 @@ public class UserAuthController {
 
         return ResponseEntity.ok("successfully registered");
     }
-    @GetMapping("/users")
+    @GetMapping("/user")
     public ResponseEntity<String> getUser() {
         return ResponseEntity.ok("successfully logged in");
     }
