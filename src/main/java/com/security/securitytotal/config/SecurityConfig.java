@@ -1,10 +1,7 @@
 package com.security.securitytotal.config;
 
 
-import com.security.securitytotal.jwtSecurity.JwtAuthProvider;
-import com.security.securitytotal.jwtSecurity.JwtAutheticationFilter;
-import com.security.securitytotal.jwtSecurity.JwtUtil;
-import com.security.securitytotal.jwtSecurity.JwtValidateFilter;
+import com.security.securitytotal.jwtSecurity.*;
 import com.security.securitytotal.user.UserAuthService;
 import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +60,7 @@ public class SecurityConfig {
 
          JwtAutheticationFilter jwtAutheticationFilter=new JwtAutheticationFilter(authenticationManager,jwtUtil);
          JwtValidateFilter jwtValidateFilter=new JwtValidateFilter(authenticationManager);
+         JwtRefrehFilter jwtRefrehFilter=new JwtRefrehFilter(authenticationManager,jwtUtil);
 
         http
                 .authorizeHttpRequests(authorize -> authorize
@@ -76,7 +74,8 @@ public class SecurityConfig {
                         .frameOptions(frame -> frame.disable())
                 )
                 .addFilterBefore(jwtAutheticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(jwtValidateFilter, JwtAutheticationFilter.class);
+                .addFilterAfter(jwtValidateFilter, JwtAutheticationFilter.class)
+                .addFilterAfter(jwtRefrehFilter, JwtValidateFilter.class);
 
 
 

@@ -17,8 +17,8 @@ public class JwtUtil {
     private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
 
-    public  String generateToken(String username) {
-        return Jwts.builder().setExpiration(Date.from(Instant.now().plusSeconds(3600)))
+    public  String generateToken(String username,long Expiration) {
+        return Jwts.builder().setExpiration(new Date(System.currentTimeMillis() + Expiration*60*1000))
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, key)
